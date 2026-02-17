@@ -1,0 +1,22 @@
+<?php
+// ***objektorjenteeritud***
+
+
+// Andmebaasi ühenduse andmed
+$db_server = 'localhost';
+$db_andmebaas = 'car_rent';
+$db_kasutaja = 'kkold';
+$db_salasona = '1488';
+
+
+// Ühenduse loomine
+$yhendus = new mysqli($db_server, $db_kasutaja, $db_salasona, $db_andmebaas);
+
+
+// Ühenduse kontroll
+if (!$yhendus) {
+    die('Ei saa ühendust andmebaasiga');
+}
+
+// // Ühenduse sulgemine
+// $yhendus->close();
