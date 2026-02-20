@@ -5,8 +5,8 @@
 // Andmebaasi ühenduse andmed
 $db_server = 'localhost';
 $db_andmebaas = 'car_rent';
-$db_kasutaja = 'kkold';
-$db_salasona = '1488';
+$db_kasutaja = 'root';
+$db_salasona = '';
 
 
 // Ühenduse loomine

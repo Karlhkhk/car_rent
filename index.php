@@ -47,7 +47,7 @@ include("config.php");
 
                 <form class="d-flex" role="search">
                     <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Otsi autot">
+                        <input class="form-control" type="search" placeholder="Otsi autot" name="search">
                         <button class="btn btn-outline-secondary" type="submit">
                             <i class="bi bi-search"></i>
                         </button>
@@ -57,6 +57,16 @@ include("config.php");
         </div>
     </nav>
     <!-- Hero -->
+     
+     <?php
+    //  $paring = 'SELECT * FROM cars';
+    //  if (isset($_GET["search"])) {
+    // $otsi = $_GET["search"];
+    // $paring = .= ' WHERE mark LIKE "'. $otsi
+
+
+    //  }
+     ?>
     <div class="container my-5">
         <div class="hero-box">
             <div class="row align-items-center">
@@ -66,28 +76,79 @@ include("config.php");
                     <button class="btn btn-dark btn-lg mt-3 px-4" type="button">Vaata autosid</button>
                 </div>
                 <div class="col-md-7">
-                     <img src="https://picsum.photos/id/200/1000/500" class="hero-img" alt="Auto pilt">
+                     <img src="https://loremflickr.com/600/350/car" class="hero-img" alt="Auto pilt">
                 </div>
+                <form action="/search" method="GET">
+  <input type="text" name="q" placeholder="Search...">
+  <button type="submit">Go</button>
+</form>
             </div>
-            
         </div>
     </div>
-<?php
-//päring 
-$paring = 'SELECT * FROM cars LIMIT 10'; 
+    <?php
+$paring = 'SELECT * FROM cars'; // Original string
+
+if (isset($_GET["search"])) {
+  $otsi = $_GET["search"];
+  // Added a space before WHERE
+  $paring .= ' WHERE mark LIKE "%'.$otsi.'%"'; 
+}
+
+
+$paring .= ' LIMIT 12'; 
+
 $valjund = mysqli_query($yhendus, $paring);
+?>
+
+
+        <!-- autode kaardid -->
+        <div class="container">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Auto</strong> otsingut ei leitud!.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+
+          <div class="row">
+            <?php
+        while($rida = mysqli_fetch_row($valjund)){ 
+            ?>
+            <!-- kaart --> 
+            <div class="col-sm-3">
+              <div class="card my-2" style="width: 19rem;">
+                <img src="https://loremflickr.com/600/350/<?php echo $rida[1]; ?>" class="card-img-top" alt="auto">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col"><h5 class="card-title"><?php echo $rida[1]; ?></h5></div>
+                    <div class="col text-end"><i class="bi bi-heart"></i></div>
+                  </div>
+
+                  <p class="card-text text-secondary"><?php echo $rida[2]; ?></p>
+                  <p class="card-text">
+                  Mootor: <?php echo $rida[3]; ?><br>
+                  Kütus: <?php echo $rida[4]; ?><br>
+                  Hind: <?php echo $rida[5]; ?>€/päev</p>
+                  <a href="#" class="btn btn-dark w-100">Rendi</a>
+                </div>
+              </div>
+            </div>
+            <!-- /kaart -->
+           <?php } ?>
+<!-- <?php
+//päring 
+// $paring = 'SELECT * FROM cars LIMIT 10'; 
+// $valjund = mysqli_query($yhendus, $paring);
 // while($rida = mysqli_fetch_row($valjund)){ 
 // }
 ?>
-    <!-- Kaardid -->
-    <div class="container my-5">
+    Kaardid -->
+    <!-- <div class="container my-5">
         <div class="row row-cols-1 row-cols-md-4 g-4">
             <?php
-            while ($rida = mysqli_fetch_row($valjund))
+            // while ($rida = mysqli_fetch_row($valjund))
             ?>
             <div class="col">
                 <div class="card h-100 border-0 shadow-sm rounded-3">
-                    <img src="https://picsum.photos/id/1071/400/250" class="card-img-top rounded-top-3" alt="Auto pilt">
+                    <img src="https://loremflickr/id/600/350/500" class="card-img-top rounded-top-3" alt="Auto pilt">
                     
                     <div class="card-body">
                         <div class="row">
@@ -111,7 +172,7 @@ $valjund = mysqli_query($yhendus, $paring);
             </div>
 
         </div>
-    </div>
+    </div> -->
 <div class="container d-flex justify-content-center my-5">
         <nav aria-label="Page navigation">
             <ul class="pagination">
