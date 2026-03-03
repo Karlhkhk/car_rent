@@ -1,3 +1,8 @@
+<?php
+include("config.php");
+?>
+
+
 <!doctype html>
 <html lang="et">
 <head>
@@ -18,7 +23,7 @@
 
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="#">Avaleht</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.php">Avaleht</a></li>
         <li class="nav-item"><a class="nav-link active" href="#">Autod</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Hinnad</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Kontakt</a></li>
@@ -33,43 +38,39 @@
 
 <!-- SISU -->
 <div class="container my-5">
-
+  
   <div class="card shadow-sm">
     <div class="row g-0">
-
+      <!-- Pilt -->
       <div class="col-md-6">
-        <img src="<?php echo htmlspecialchars($car->pilt); ?>" 
-             class="img-fluid h-100 object-fit-cover rounded-start" 
-             alt="<?php echo htmlspecialchars($car->mudel); ?>">
+        <img src="https://loremflickr.com/800/500/audi"
+             class="img-fluid h-100 object-fit-cover rounded-start"
+             alt="Auto pilt">
       </div>
 
+      <!-- Info -->
       <div class="col-md-6">
         <div class="card-body p-4">
 
-          <h3 class="card-title mb-3"><?php echo htmlspecialchars($car->mark . ' ' . $car->mudel); ?></h3>
-          <p class="text-muted mb-4"><?php echo htmlspecialchars($car->tyyp); ?> · <?php echo htmlspecialchars($car->aasta); ?></p>
+          <h3 class="card-title mb-3">Audi R8 Spyder</h3>
+          <p class="text-muted mb-4">Cabrio · 2021</p>
 
           <ul class="list-unstyled mb-4">
-            <li><strong>Mootor:</strong> <?php echo htmlspecialchars($car->mootor); ?></li>
-            <li><strong>Kütus:</strong> <?php echo htmlspecialchars($car->kytus); ?></li>
-            <li><strong>Käigukast:</strong> <?php echo htmlspecialchars($car->kaigukast); ?></li>
-            <li><strong>Kohad:</strong> <?php echo htmlspecialchars($car->kohad); ?></li>
+            <li><strong>Mootor:</strong> V10</li>
+            <li><strong>Kütus:</strong> Bensiin</li>
+            <li><strong>Käigukast:</strong> Automaat</li>
+            <li><strong>Kohad:</strong> 2</li>
           </ul>
 
-          <h4 class="mb-3"><?php echo number_format($car->hind, 2, '.', ''); ?> € / päev</h4>
+          <h4 class="mb-3">250 € / päev</h4>
 
-          <form action="booking.php" method="POST">
-            <input type="hidden" name="car_id" value="<?php echo $car->id; ?>">
-            <button type="submit" class="btn btn-dark w-100">Rendi kohe</button>
-          </form>
+          <button class="btn btn-dark w-100">Rendi</button>
 
         </div>
       </div>
 
     </div>
   </div>
-
-</div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>

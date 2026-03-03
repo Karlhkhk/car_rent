@@ -135,7 +135,7 @@ while($rida = mysqli_fetch_row($valjund)){
           Mootor: <?php echo $rida[3]; ?><br>
           Kütus: <?php echo $rida[4]; ?><br>
           Hind: <?php echo $rida[5]; ?>€/päev</p>
-          <a href="#" class="btn btn-dark w-100">Rendi</a>
+          <a href="car.php?id=<?php echo $rida[0]; ?>" class="btn btn-dark w-100">Rendi </a>
         </div>
       </div>
     </div>
