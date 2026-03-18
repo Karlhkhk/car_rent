@@ -1,6 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION['is_admin'])) {
+    header("Location: login.php");
+    exit();
 include("../config.php");
 
+}
 if (isset($_POST['lisa_auto'])) {
     $mark = $_POST['mark'];
     $model = $_POST['model'];
@@ -16,10 +21,10 @@ if (isset($_POST['lisa_auto'])) {
     $paring = "INSERT INTO cars (mark, model, engine, fuel, price, image, year, transmission, seats, description, status) 
                VALUES ('$mark', '$model', '$engine', '$fuel', '$price', '$image', '$year', '$transmission', '$seats', '$description', '$status')";
     mysqli_query($yhendus, $paring);
-    if 
+//     if 
     
-    header("Location: index.php");
-    exit(); 
+//     header("Location: index.php");
+//     exit(); 
 }
 ?>
 
@@ -42,7 +47,9 @@ if (isset($_POST['lisa_auto'])) {
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h3 class="mb-0">Lisa auto</h3>
             <a href="index.php" class="btn btn-outline-secondary btn-sm">Tagasi</a>
+            <a href="logout.php" class="btn btn-outline-secondary btn-sm">Logi välja</a>
         </div>
+        
 
         <div class="card shadow-sm">
             <div class="card-body p-4">

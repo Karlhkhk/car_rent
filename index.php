@@ -1,8 +1,6 @@
 <?php
 include("config.php");
 ?>
-
-
 <!doctype html>
 <html lang="et">
 <head>
@@ -49,10 +47,13 @@ include("config.php");
                     <div class="input-group">
                         <input class="form-control" type="search" placeholder="Otsi autot" name="search">
                         <button class="btn btn-outline-secondary" type="submit">
-                            <i class="bi bi-search"></i>
-                        </button>
+                            <i class="bi bi-search"></i>  
+                       </button>
                     </div>
                 </form>
+                
+                <a href="admin/login.php" class="btn btn-dark">Login</a>
+                
             </div>
         </div>
     </nav>
@@ -99,7 +100,7 @@ $valjund = mysqli_query($yhendus, $paring);
  <div class="container">
 
   <?php
-  // Alert kast, kui autot ei leitud
+  // Vea teade
     if ($result=mysqli_query($yhendus,$paring)){
       $rowcount=mysqli_num_rows($result);
       if ($rowcount == 0) {
@@ -135,7 +136,7 @@ while($rida = mysqli_fetch_row($valjund)){
           Mootor: <?php echo $rida[3]; ?><br>
           Kütus: <?php echo $rida[4]; ?><br>
           Hind: <?php echo $rida[5]; ?>€/päev</p>
-          <a href="car.php?id=<?php echo $rida[0]; ?>" class="btn btn-dark w-100">Rendi </a>
+          <a href="car.php?id=<?php echo $rida[0]; ?>" class="btn btn-dark w-100">Rendi</a>
         </div>
       </div>
     </div>

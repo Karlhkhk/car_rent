@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['is_admin'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include("../config.php");
 
 if (isset($_GET['kustuta'])) {
@@ -21,16 +27,21 @@ $valjund = mysqli_query($yhendus, $paring);
 </head>
 <body>
     <header>
-<nav class="navbar navbar-expand-lg bg-white border-bottom mb-4 py-3">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom mb-4 py-3">
         <div class="container">
-            <div class="d-flex align-items-center">
-                <a class="navbar-brand fw-bold text-dark me-4" href="index.php">Autorent admin</a>
+            <div class="d-flex align-items-center w-100 justify-content-between">
                 
-                <div class="navbar-nav flex-row gap-3">
-                    <a class="nav-link text-dark fw-bold px-0" href="index.php">Autod</a>
-                    <a class="nav-link text-muted px-0" href="#">Reserveeringud</a>
-                    <a class="nav-link text-muted px-0" href="#">Kasutajad</a>
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand fw-bold text-dark me-4" href="index.php">Autorent admin</a>
+                    <div class="navbar-nav flex-row gap-3">
+                        <a class="nav-link text-dark fw-bold px-0" href="index.php">Autod</a>
+                        <a class="nav-link text-muted px-0" href="#">Reserveeringud</a>
+                        <a class="nav-link text-muted px-0" href="#">Kasutajad</a>
+                    </div>
                 </div>
+
+                <a href="logout.php" class="btn btn-outline-danger">Logi välja</a>
+                
             </div>
         </div>
     </nav>

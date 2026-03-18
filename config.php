@@ -1,5 +1,4 @@
 <?php
-// ***objektorjenteeritud***
 
 
 // Andmebaasi ühenduse andmed
