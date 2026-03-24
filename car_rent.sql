@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2026 at 12:29 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Loomise aeg: Märts 24, 2026 kell 01:16 PL
+-- Serveri versioon: 10.4.32-MariaDB
+-- PHP versioon: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `car_rent`
+-- Andmebaas: `car_rent`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cars`
+-- Tabeli struktuur tabelile `cars`
 --
 
 CREATE TABLE `cars` (
@@ -43,7 +43,7 @@ CREATE TABLE `cars` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `cars`
+-- Andmete tõmmistamine tabelile `cars`
 --
 
 INSERT INTO `cars` (`id`, `mark`, `model`, `engine`, `fuel`, `price`, `image`, `year`, `transmission`, `seats`, `description`, `status`) VALUES
@@ -1053,25 +1053,83 @@ INSERT INTO `cars` (`id`, `mark`, `model`, `engine`, `fuel`, `price`, `image`, `
 (1001, 'Volkswagen', 'Golf', 'V16', 'biodiesel', 123, 'http://dummyimage.com/181x100.png/dddddd/000000', '0000', '', 0, '', 'vaba'),
 (1002, 'Dodge', 'Viper', 'Inline-4', 'ethanol', 54, 'http://dummyimage.com/146x100.png/5fa2dd/ffffff', '0000', '', 0, '', 'vaba');
 
+-- --------------------------------------------------------
+
 --
--- Indexes for dumped tables
+-- Tabeli struktuur tabelile `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `car_id` int(11) DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `status` enum('pending','confirmed','cancelled') DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabeli struktuur tabelile `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `role` enum('customer','admin') DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `password_hash` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indeksid tõmmistatud tabelitele
 --
 
 --
--- Indexes for table `cars`
+-- Indeksid tabelile `cars`
 --
 ALTER TABLE `cars`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indeksid tabelile `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksid tabelile `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT tõmmistatud tabelitele
 --
 
 --
--- AUTO_INCREMENT for table `cars`
+-- AUTO_INCREMENT tabelile `cars`
 --
 ALTER TABLE `cars`
   MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1003;
+
+--
+-- AUTO_INCREMENT tabelile `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT tabelile `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

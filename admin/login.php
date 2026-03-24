@@ -31,44 +31,39 @@ if (isset($_POST['login'])) {
     <title>Admin sisselogimine</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light d-flex align-items-center justify-content-center" style="height: 100vh;">
+<body class="bg-light">
 
-    <div class="container">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="../index.php">Autorent</a>
+            <a href="../index.php" class="btn btn-outline-secondary btn-sm">Tagasi</a>
+        </div>
+    </nav>
+
+    <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-5 col-lg-4">
-                
-                <div class="card shadow-sm border-0 rounded-3">
-                    <div class="card-body p-4 p-md-5">
-                        
-                        <h3 class="text-center mb-4 fw-bold">Autorent admin</h3>
-                        
-                        <?php if(isset($viga)): ?>
-                            <div class="alert alert-danger py-2" role="alert">
-                                <?php echo $viga; ?>
-                            </div>
-                        <?php endif; ?>
-                        
-                        <form method="POST">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold">Kasutaja</label>
-                                <input type="text" name="kasutaja" class="form-control" placeholder="Sisesta kasutajanimi" required>
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold">Parool</label>
-                                <input type="password" name="parool" class="form-control" placeholder="Sisesta parool" required>
-                            </div>
-                            
-                            <button type="submit" name="login" class="btn btn-dark w-100 py-2">Logi sisse</button>
-                        </form>
+            <div class="col-12 col-md-6 col-lg-4">
+                <h3 class="mb-4 fw">Admin sisselogimine</h3>
 
-                        <div class="text-center mt-4">
-                            <a href="../index.php" class="text-decoration-none text-muted small">&larr; Tagasi avalehele</a>
-                        </div>
-
+                <?php if(isset($viga)): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $viga; ?>
                     </div>
-                </div>
+                <?php endif; ?>
 
+                <form method="POST" class="border bg-white p-4 rounded-2">
+                    <div class="mb-3">
+                        <label class="form-label">Kasutaja</label>
+                        <input type="text" name="kasutaja" class="form-control" placeholder="Sisesta kasutajanimi" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Parool</label>
+                        <input type="password" name="parool" class="form-control" placeholder="Sisesta parool" required>
+                    </div>
+
+                    <button type="submit" name="login" class="btn btn-dark w-100">Logi sisse</button>
+                </form>
             </div>
         </div>
     </div>
