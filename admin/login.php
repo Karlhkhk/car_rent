@@ -1,26 +1,38 @@
 <?php
+include("config.php");
 session_start();
 
-if (isset($_SESSION['is_admin'])) {
-    header("Location: index.php");
-    exit();
-}
-
-if (isset($_POST['login'])) {
-    $sisestatud_kasutaja = $_POST['kasutaja'];
-    $sisestatud_parool = $_POST['parool'];
-
-    $oige_kasutaja = "admin";
-    $oige_hash = password_hash("parool123", PASSWORD_DEFAULT);
-
-    if ($sisestatud_kasutaja === $oige_kasutaja && password_verify($sisestatud_parool, $oige_hash)) {
-        $_SESSION['is_admin'] = true;
-        header("Location: index.php");
-        exit();
+// if (isset($_SESSION['is_admin'])) {
+//     header("Location: index.php");
+//     exit();
+// }
+if(isset($_POST['email']) && isset($_POST['parool'])){
+    $email = $_POST['email'];
+    $parool = $_POST['parool'];
+    if ($email == 'admin' && $parool == 'admin')  {
+       
+       
     } else {
-        $viga = "Vale kasutaja või parool!";
+        echo "ei";
     }
+
+    // echo "tootab";
 }
+// if (isset($_POST['login'])) {
+//     $sisestatud_kasutaja = $_POST['kasutaja'];
+//     $sisestatud_parool = $_POST['parool'];
+
+//     $oige_kasutaja = "admin";
+//     $oige_hash = password_hash("parool123", PASSWORD_DEFAULT);
+
+//     if ($sisestatud_kasutaja === $oige_kasutaja && password_verify($sisestatud_parool, $oige_hash)) {
+//         $_SESSION['is_admin'] = true;
+//         header("Location: index.php");
+//         exit();
+//     } else {
+//         $viga = "Vale kasutaja või parool!";
+//     }
+// }
 ?>
 
 <!doctype html>
@@ -53,8 +65,8 @@ if (isset($_POST['login'])) {
 
                 <form method="POST" class="border bg-white p-4 rounded-2">
                     <div class="mb-3">
-                        <label class="form-label">Kasutaja</label>
-                        <input type="text" name="kasutaja" class="form-control" placeholder="Sisesta kasutajanimi" required>
+                        <label class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control" placeholder="Sisesta email" required value="admin@test.ee">
                     </div>
 
                     <div class="mb-4">
