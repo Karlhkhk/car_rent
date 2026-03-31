@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+// include("config.php");
 session_start();
 
 // if (isset($_SESSION['is_admin'])) {
@@ -9,13 +9,14 @@ session_start();
 if(isset($_POST['email']) && isset($_POST['parool'])){
     $email = $_POST['email'];
     $parool = $_POST['parool'];
+    $paring = "Select id, password_hash from users where "
     if ($email == 'admin' && $parool == 'admin')  {
-       
-       
+    $_SESSION['is_admin'] = true;
+        header("Location: index.php");
+        exit();
     } else {
-        echo "ei";
-    }
-
+        $viga = "Vale kasutaja või parool!";
+}
     // echo "tootab";
 }
 // if (isset($_POST['login'])) {
