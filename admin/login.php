@@ -6,18 +6,17 @@ session_start();
 //     header("Location: index.php");
 //     exit();
 // }
-if(isset($_POST['email']) && isset($_POST['parool'])){
+if (isset($_POST['email']) && isset($_POST['parool'])) {
     $email = $_POST['email'];
     $parool = $_POST['parool'];
-    $paring = "Select id, password_hash from users where "
-    if ($email == 'admin' && $parool == 'admin')  {
-    $_SESSION['is_admin'] = true;
+
+    if ($email == 'admin' && $parool == 'admin') {
+        $_SESSION['is_admin'] = true;
         header("Location: index.php");
         exit();
     } else {
         $viga = "Vale kasutaja või parool!";
-}
-    // echo "tootab";
+    }
 }
 // if (isset($_POST['login'])) {
 //     $sisestatud_kasutaja = $_POST['kasutaja'];
