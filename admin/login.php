@@ -1,38 +1,42 @@
 <?php
-// include("config.php");
 session_start();
 
-// if (isset($_SESSION['is_admin'])) {
-//     header("Location: index.php");
-//     exit();
-// }
-if (isset($_POST['email']) && isset($_POST['parool'])) {
-    $email = $_POST['email'];
-    $parool = $_POST['parool'];
-
-    if ($email == 'admin' && $parool == 'admin') {
-        $_SESSION['is_admin'] = true;
-        header("Location: index.php");
-        exit();
-    } else {
-        $viga = "Vale kasutaja või parool!";
-    }
+if (isset($_SESSION['is_admin'])) {
+    header("Location: index.php");
+    exit();
 }
-// if (isset($_POST['login'])) {
-//     $sisestatud_kasutaja = $_POST['kasutaja'];
-//     $sisestatud_parool = $_POST['parool'];
 
-//     $oige_kasutaja = "admin";
-//     $oige_hash = password_hash("parool123", PASSWORD_DEFAULT);
+include("../config.php");
 
-//     if ($sisestatud_kasutaja === $oige_kasutaja && password_verify($sisestatud_parool, $oige_hash)) {
-//         $_SESSION['is_admin'] = true;
-//         header("Location: index.php");
-//         exit();
-//     } else {
-//         $viga = "Vale kasutaja või parool!";
-//     }
-// }
+$admin_email = "admin@test.ee";
+
+if (isset($_POST['login'])) {
+    $sisestatud_email = $_POST['email'] ?? "";
+    $sisestatud_parool = $_POST['parool'] ?? "";
+
+    $paring = mysqli_prepare(
+        $yhendus,
+        "SELECT id, password_hash FROM users WHERE email = ? AND role = 'admin' LIMIT 1"
+    );
+
+    if ($paring) {
+        mysqli_stmt_bind_param($paring, "s", $sisestatud_email);
+        mysqli_stmt_execute($paring);
+        mysqli_stmt_bind_result($paring, $admin_id, $db_hash);
+        $leitud = mysqli_stmt_fetch($paring);
+        mysqli_stmt_close($paring);
+
+        if ($leitud && password_verify($sisestatud_parool, $db_hash)) {
+            $_SESSION['is_admin'] = true;
+            $_SESSION['admin_id'] = (int)$admin_id;
+            $_SESSION['admin_email'] = $sisestatud_email;
+            header("Location: index.php");
+            exit();
+        }
+    }
+
+    $viga = "Vale kasutaja või parool!";
+}
 ?>
 
 <!doctype html>

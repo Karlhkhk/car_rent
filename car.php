@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("config.php");
 
 $car_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -13,34 +14,27 @@ if ($auto_valjund && mysqli_num_rows($auto_valjund) > 0) {
 }
 
 if (isset($_POST['reserveeri']) && $auto) {
-  $algus = $_POST['start_date'];
-  $lopp = $_POST['end_date'];
-
-  if (empty($algus) || empty($lopp)) {
-    $viga = "Palun sisesta algus ja lõpp kuupäev.";
+  if (!isset($_SESSION['user_id'])) {
+    $viga = "Broneerimiseks pead olema sisselogitud kasutajana.";
   } else {
-    $algus_aeg = date_create($algus);
-    $lopp_aeg = date_create($lopp);
+    $algus = $_POST['start_date'];
+    $lopp = $_POST['end_date'];
 
-    if (!$algus_aeg || !$lopp_aeg) {
-      $viga = "Kuupäev ei ole korrektne.";
-    } elseif ($lopp_aeg < $algus_aeg) {
-      $viga = "Lõppkuupäev ei saa olla enne alguskuupäeva.";
+    if (empty($algus) || empty($lopp)) {
+      $viga = "Palun sisesta algus ja lõpp kuupäev.";
     } else {
-      $paevad = $algus_aeg->diff($lopp_aeg)->days + 1;
-      $koguhind = $paevad * (float)$auto['price'];
+      $algus_aeg = date_create($algus);
+      $lopp_aeg = date_create($lopp);
 
-      $user_id = null;
-      $user_paring = "SELECT id FROM users WHERE role = 'customer' ORDER BY id ASC LIMIT 1";
-      $user_valjund = mysqli_query($yhendus, $user_paring);
-      if ($user_valjund && mysqli_num_rows($user_valjund) > 0) {
-        $user_rida = mysqli_fetch_assoc($user_valjund);
-        $user_id = (int)$user_rida['id'];
-      }
-
-      if (!$user_id) {
-        $viga = "Broneerimiseks lisa users tabelisse vähemalt üks customer kasutaja.";
+      if (!$algus_aeg || !$lopp_aeg) {
+        $viga = "Kuupäev ei ole korrektne.";
+      } elseif ($lopp_aeg < $algus_aeg) {
+        $viga = "Lõppkuupäev ei saa olla enne alguskuupäeva.";
       } else {
+        $paevad = $algus_aeg->diff($lopp_aeg)->days + 1;
+        $koguhind = $paevad * (float)$auto['price'];
+        $user_id = (int)$_SESSION['user_id'];
+
         $koguhind_sql = number_format($koguhind, 2, '.', '');
         $lisamine = "INSERT INTO reservations (user_id, car_id, start_date, end_date, total_price, status)
               VALUES ('$user_id', '$car_id', '$algus', '$lopp', '$koguhind_sql', 'pending')";

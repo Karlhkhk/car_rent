@@ -53,6 +53,8 @@ include("config.php");
                 </form>
                 
                 <a href="admin/login.php" class="btn btn-dark">Login</a>
+                <a href="admin/register.php" class="btn btn-dark">Register</a>
+
                 
             </div>
         </div>

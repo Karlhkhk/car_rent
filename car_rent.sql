@@ -2113,7 +2113,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role`, `first_name`, `last_name`, `email`, `phone`, `password_hash`, `created_at`) VALUES
-(1, 'admin', 'Admin', 'User', 'admin@test.ee', '5555555', '$2y$10$jg04DBZsAyj.krflSaVCKeH9wWOKuQVYQzX.8pyXQ2hMtKP3HrDSC', '2026-03-09 11:08:17'),
+(1, 'admin', 'Admin', 'User', 'admin@test.ee', '5555555', '$2y$10$NvzRRPAo5AVt8/SX4TyYoO6AzyyFzyerSWSVYszWOZd3KY8mELIIW', '2026-03-09 11:08:17'),
 (2, 'user', 'Karl', 'Tamm', 'karl1@test.ee', '5550001', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9lr9K9p7G1Z8q7F0eG0G2e', '2026-03-09 11:40:16'),
 (3, 'user', 'Martin', 'Kask', 'martin2@test.ee', '5550002', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9lr9K9p7G1Z8q7F0eG0G2e', '2026-03-09 11:40:16'),
 (4, 'user', 'Rasmus', 'Saar', 'rasmus3@test.ee', '5550003', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9lr9K9p7G1Z8q7F0eG0G2e', '2026-03-09 11:40:16'),

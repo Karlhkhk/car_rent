@@ -3,9 +3,9 @@ session_start();
 if (!isset($_SESSION['is_admin'])) {
     header("Location: login.php");
     exit();
-include("../config.php");
-
 }
+
+include("../config.php");
 if (isset($_POST['lisa_auto'])) {
     $mark = $_POST['mark'];
     $model = $_POST['model'];
